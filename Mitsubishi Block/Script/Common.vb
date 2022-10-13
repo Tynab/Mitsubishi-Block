@@ -3,6 +3,7 @@ Imports System.ConsoleColor
 Imports System.Diagnostics.Process
 Imports System.IO
 Imports System.IO.Directory
+Imports System.Math
 Imports System.Net
 Imports System.Runtime.CompilerServices
 Imports System.Threading.Thread
@@ -11,8 +12,6 @@ Imports System.Windows.Forms.Application
 Imports System.Windows.Forms.MessageBox
 Imports System.Windows.Forms.MessageBoxButtons
 Imports System.Windows.Forms.MessageBoxIcon
-Imports System.Math
-Imports System.Drawing
 
 Friend Module Common
 #Region "Helper"
@@ -124,19 +123,23 @@ Friend Module Common
         Dim c = Ceiling((w + h) * 2 / Pow(10, 3))
         Dim s = Ceiling(w * h / Pow(10, 6))
         Dim block = c + s
-        For i = 10 To Integer.MinValue
+        For i = 10 To Integer.MaxValue
             If (block + i) Mod 30 = 0 Then
                 block += i
                 Exit For
             End If
         Next
+        ' Print
         Intro()
-        ForegroundColor = ConsoleColor.DarkGreen
-        WriteLine(vbTab & "C" & vbTab & vbTab & $": {c}")
-        WriteLine(vbTab & "S" & vbTab & vbTab & $": {s}")
-        WriteLine(vbTab & "ブロック" & vbTab & $": {block}")
-        ' TODO
-        ReadLine()
+        ForegroundColor = DarkCyan
+        Dim fmt = FmtNo(c, s, block)
+        WriteLine(vbTab & "Ｃ (m)" & vbTab & vbTab & ": " + String.Format(fmt, c))
+        WriteLine(vbTab & "Ｓ (m²)" & vbTab & vbTab & ": " + String.Format(fmt, s))
+        WriteLine(vbTab & "ブロック (個)" & vbTab & ": " + String.Format(fmt, block))
+        ' Credit
+        If Show("続けたいですか？", "質問", YesNo, Question) = DialogResult.Yes Then
+            RunApp()
+        End If
     End Sub
 #End Region
 
@@ -168,6 +171,21 @@ Friend Module Common
     ''' <returns>Number converted.</returns>
     Private Function ConvertToG(num As Double)
         Return If(num < 30, num * 910, num)
+    End Function
+
+    ''' <summary>
+    ''' Format number.
+    ''' </summary>
+    ''' <param name="c">Circuit.</param>
+    ''' <param name="s">Spread.</param>
+    ''' <param name="block">Block.</param>
+    ''' <returns>Format.</returns>
+    Private Function FmtNo(c As Double, s As Double, block As Double)
+        Dim cSize = c.ToString().Length
+        Dim sSize = s.ToString().Length
+        Dim blockSize = block.ToString().Length
+        Dim maxSize = Max(blockSize, Max(cSize, sSize))
+        Return "{0," + maxSize.ToString() + ":####.#}"
     End Function
 #End Region
 
@@ -207,41 +225,16 @@ Friend Module Common
     End Sub
 
     ''' <summary>
-    ''' Title info.
-    ''' </summary>
-    ''' <param name="caption">Caption.</param>
-    Private Sub TitInfo(caption As String)
-        ForegroundColor = Cyan
-        Write(caption)
-    End Sub
-
-    ''' <summary>
-    ''' Title info expansion.
-    ''' </summary>
-    ''' <param name="caption">Caption.</param>
-    Private Sub TitInfoExp(caption As String)
-        TitInfo(caption)
-        ForegroundColor = White
-    End Sub
-
-    ''' <summary>
-    ''' Detail double input.
-    ''' </summary>
-    ''' <param name="caption">Caption.</param>
-    ''' <returns>Input value.</returns>
-    Friend Function DtlDInp(caption As String)
-        TitInfoExp(caption)
-        Return Val(ReadLine)
-    End Function
-
-    ''' <summary>
     ''' Header double input.
     ''' </summary>
     ''' <param name="caption">Caption.</param>
     ''' <returns>Input value.</returns>
     Friend Function HdrDInp(caption As String)
         Intro()
-        Return DtlDInp(caption)
+        ForegroundColor = Cyan
+        Write(caption)
+        ForegroundColor = White
+        Return Val(ReadLine)
     End Function
 #End Region
 End Module
