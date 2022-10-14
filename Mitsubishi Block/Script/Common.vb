@@ -94,9 +94,57 @@ Friend Module Common
     ''' Run application.
     ''' </summary>
     Private Sub RunApp()
-        ' Input
-        Dim w = ImpVal("w")
-        Dim h = ImpVal("h")
+        ' w
+        Dim w = 0D
+        Dim sW = "W = "
+        For i = 0 To Integer.MaxValue
+            Intro()
+            If i > 0 Then
+                ForegroundColor = Gray
+                WriteLine(sW)
+                Dim wi = InpG(vbCrLf & vbTab & $"w{i + 1} = ")
+                If wi > 0 Then
+                    w += wi
+                    sW += $" + {wi}"
+                Else
+                    Exit For
+                End If
+            Else
+                Dim wi = InpG(vbTab & $"w{i + 1} = ")
+                If wi > 0 Then
+                    w += wi
+                    sW += wi.ToString()
+                Else
+                    i = -1
+                End If
+            End If
+        Next
+        ' h
+        Dim h = 0D
+        Dim sH = "H = "
+        For i = 0 To Integer.MaxValue
+            Intro()
+            ForegroundColor = Gray
+            WriteLine(sW)
+            If i > 0 Then
+                WriteLine(sH)
+                Dim hi = InpG(vbCrLf & vbTab & $"h{i + 1} = ")
+                If hi > 0 Then
+                    h += hi
+                    sH += $" + {hi}"
+                Else
+                    Exit For
+                End If
+            Else
+                Dim hi = InpG(vbCrLf & vbTab & $"h{i + 1} = ")
+                If hi > 0 Then
+                    h += hi
+                    sH += hi.ToString()
+                Else
+                    i = -1
+                End If
+            End If
+        Next
         ' Process
         Dim c = Ceiling((w + h) * 2 / Pow(10, 3))
         Dim s = Ceiling(w * h / Pow(10, 6))
@@ -108,8 +156,11 @@ Friend Module Common
             End If
         Next
         ' Output
-        Dim fmt = FmtNo(c, s, block)
+        Dim fmt = FmtNo(w, h, c, s, block)
         Intro()
+        ForegroundColor = Gray
+        WriteLine(vbTab & "Ｗ (mm)" & vbTab & vbTab & ": " + String.Format(fmt, w))
+        WriteLine(vbTab & "Ｈ (mm)" & vbTab & vbTab & ": " + String.Format(fmt, h))
         ForegroundColor = DarkCyan
         WriteLine(vbTab & "Ｃ (m)" & vbTab & vbTab & ": " + String.Format(fmt, c))
         WriteLine(vbTab & "Ｓ (m²)" & vbTab & vbTab & ": " + String.Format(fmt, s))
@@ -159,15 +210,19 @@ Friend Module Common
     ''' <summary>
     ''' Format number.
     ''' </summary>
+    ''' <param name="w">Width.</param>
+    ''' <param name="h">Heigh.</param>
     ''' <param name="c">Circuit.</param>
     ''' <param name="s">Spread.</param>
     ''' <param name="block">Block.</param>
     ''' <returns>Format.</returns>
-    Private Function FmtNo(c As Double, s As Double, block As Double)
+    Private Function FmtNo(w As Double, h As Double, c As Double, s As Double, block As Double)
+        Dim wSize = w.ToString().Length
+        Dim hSize = h.ToString().Length
         Dim cSize = c.ToString().Length
         Dim sSize = s.ToString().Length
         Dim blockSize = block.ToString().Length
-        Dim maxSize = Max(blockSize, Max(cSize, sSize))
+        Dim maxSize = Max(Max(Max(wSize, hSize), Max(cSize, sSize)), blockSize)
         Return "{0," + maxSize.ToString() + ":####.#}"
     End Function
 #End Region
@@ -211,51 +266,32 @@ Friend Module Common
     ''' Credit.
     ''' </summary>
     Private Sub Credit()
+        ForegroundColor = DarkGray
+        Write(vbCrLf & "続行するには、任意のキーを押してください...")
+        ReadKey()
         If Show("続けたいですか？", "質問", YesNo, Question, Button2) = DialogResult.Yes Then
-            ForegroundColor = Gray
-            Write(vbCrLf & "続行するには、任意のキーを押してください...")
-            ReadKey()
             RunApp()
-        Else
-            ForegroundColor = Gray
-            Write(vbCrLf & "終了するには、任意のキーを押してください...")
-            ReadKey()
         End If
     End Sub
 
     ''' <summary>
-    ''' Header double input.
+    ''' Prefix input.
     ''' </summary>
     ''' <param name="caption">Caption.</param>
-    ''' <returns>Input value.</returns>
-    Friend Function HdrDInp(caption As String)
-        Intro()
+    Private Sub PrefInp(caption As String)
         ForegroundColor = Cyan
         Write(caption)
         ForegroundColor = White
-        Return Val(ReadLine)
-    End Function
+    End Sub
 
     ''' <summary>
-    ''' Import value.
+    ''' Input G.
     ''' </summary>
-    ''' <param name="prefix"></param>
-    ''' <returns></returns>
-    Private Function ImpVal(prefix As String)
-        Dim x = 0D
-        For i = 0 To Integer.MaxValue
-            Dim xi = HdrDInp(vbTab & $"{prefix}{i + 1} = ")
-            If Not xi > 0 Then
-                If i = 0 Then
-                    i = -1
-                Else
-                    Exit For
-                End If
-            Else
-                x += ConvertToG(xi)
-            End If
-        Next
-        Return x
+    ''' <param name="caption">Caption.</param>
+    ''' <returns>Input value.</returns>
+    Private Function InpG(caption As String)
+        PrefInp(caption)
+        Return ConvertToG(Val(ReadLine))
     End Function
 #End Region
 End Module
