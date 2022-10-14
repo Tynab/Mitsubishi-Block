@@ -1,4 +1,4 @@
-# MINEGISHI BLOCK SOLUTION
+# MITSUBISHI BLOCK SOLUTION
 Solution to help 西山 team of エマール group calculate ブロック of 三菱 from 文化シャッター partner.
 
 ## MASK

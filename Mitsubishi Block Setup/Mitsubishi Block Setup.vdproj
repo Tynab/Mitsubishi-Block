@@ -130,6 +130,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -543,7 +551,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_6463192FB1254999A5B0E36A867230CB"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "UpdateText"
@@ -593,7 +602,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_321C618F31454CDE8D8D812E53E7372A"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "CopyrightWarning"
@@ -641,7 +651,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_EEFBE862F67545198393A0FCAC6B9E86"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -663,7 +674,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_E89EA61BA34846CAA573B2D31DA90A84"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "InstallAllUsersVisible"
@@ -713,7 +725,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_7CAB226CF43148A184B305BB787C31C7"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "ShowProgress"
@@ -757,7 +770,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_6463192FB1254999A5B0E36A867230CB"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -788,7 +802,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_7CAB226CF43148A184B305BB787C31C7"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "ShowProgress"
@@ -832,7 +847,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_EEFBE862F67545198393A0FCAC6B9E86"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -854,7 +870,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_321C618F31454CDE8D8D812E53E7372A"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "CopyrightWarning"
@@ -902,7 +919,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_E89EA61BA34846CAA573B2D31DA90A84"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -917,7 +935,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_6E9D4EE0ED014E828333AE7E01E66A3D"
             {
-            "SourcePath" = "8:"
+            "SourcePath" = "8:..\\Mitsubishi Block\\obj\\Release\\Mitsubishi Block.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_FDAE4B190F6045358586DE96654815D2"
