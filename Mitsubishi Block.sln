@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Mitsubishi Block", "Mitsubishi Block\Mitsubishi Block.vbproj", "{07B6CBE0-290E-4F4D-A7AC-627C77DF07E3}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Mitsubishi Block Setup", "Mitsubishi Block Setup\Mitsubishi Block Setup.vdproj", "{9410AA2E-44BF-42A2-8853-C8A852EAFD98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{07B6CBE0-290E-4F4D-A7AC-627C77DF07E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07B6CBE0-290E-4F4D-A7AC-627C77DF07E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07B6CBE0-290E-4F4D-A7AC-627C77DF07E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9410AA2E-44BF-42A2-8853-C8A852EAFD98}.Debug|Any CPU.ActiveCfg = Debug
+		{9410AA2E-44BF-42A2-8853-C8A852EAFD98}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

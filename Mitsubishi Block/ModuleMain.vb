@@ -11,14 +11,14 @@ Public Module ModuleMain
         If Not My.Settings.Chk_Key Then
             If InputBox("シリアルを入力", "ライセンスキー") = My.Resources.key_ser Then
                 UpdVldLic()
-                RunApp()
+                FstRunApp()
             Else
                 ForegroundColor = Red
                 Write("ライセンスが間違っています。 終了するには、任意のキーを押してください...")
                 ReadKey()
             End If
         Else
-            RunApp()
+            FstRunApp()
         End If
     End Sub
 End Module

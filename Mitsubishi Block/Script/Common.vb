@@ -11,6 +11,7 @@ Imports System.Windows.Forms
 Imports System.Windows.Forms.Application
 Imports System.Windows.Forms.MessageBox
 Imports System.Windows.Forms.MessageBoxButtons
+Imports System.Windows.Forms.MessageBoxDefaultButton
 Imports System.Windows.Forms.MessageBoxIcon
 
 Friend Module Common
@@ -79,7 +80,7 @@ Friend Module Common
     ''' End process.
     ''' </summary>
     ''' <param name="name">Process name.</param>
-    Private Sub KillPrcs(name As String)
+    Friend Sub KillPrcs(name As String)
         If GetProcessesByName(name).Count > 0 Then
             For Each item In GetProcessesByName(name)
                 item.Kill()
@@ -90,36 +91,11 @@ Friend Module Common
     ''' <summary>
     ''' Run application.
     ''' </summary>
-    Friend Sub RunApp()
-        ' Input w
-        Dim w = 0D
-        For i = 0 To Integer.MaxValue
-            Dim wi = HdrDInp(vbTab & $"w{i + 1} = ")
-            If Not wi > 0 Then
-                If i = 0 Then
-                    i = -1
-                Else
-                    Exit For
-                End If
-            Else
-                w += ConvertToG(wi)
-            End If
-        Next
-        ' Input h
-        Dim h = 0D
-        For i = 0 To Integer.MaxValue
-            Dim hi = HdrDInp(vbTab & $"h{i + 1} = ")
-            If Not hi > 0 Then
-                If i = 0 Then
-                    i = -1
-                Else
-                    Exit For
-                End If
-            Else
-                h += ConvertToG(hi)
-            End If
-        Next
-        ' Calculate
+    Private Sub RunApp()
+        ' Input
+        Dim w = ImpVal("w")
+        Dim h = ImpVal("h")
+        ' Process
         Dim c = Ceiling((w + h) * 2 / Pow(10, 3))
         Dim s = Ceiling(w * h / Pow(10, 6))
         Dim block = c + s
@@ -129,17 +105,24 @@ Friend Module Common
                 Exit For
             End If
         Next
-        ' Print
+        ' Output
+        Dim fmt = FmtNo(c, s, block)
         Intro()
         ForegroundColor = DarkCyan
-        Dim fmt = FmtNo(c, s, block)
         WriteLine(vbTab & "Ｃ (m)" & vbTab & vbTab & ": " + String.Format(fmt, c))
         WriteLine(vbTab & "Ｓ (m²)" & vbTab & vbTab & ": " + String.Format(fmt, s))
         WriteLine(vbTab & "ブロック (個)" & vbTab & ": " + String.Format(fmt, block))
-        ' Credit
-        If Show("続けたいですか？", "質問", YesNo, Question) = DialogResult.Yes Then
-            RunApp()
-        End If
+        Credit()
+    End Sub
+
+    ''' <summary>
+    ''' First run.
+    ''' </summary>
+    Friend Sub FstRunApp()
+        ForegroundColor = DarkYellow
+        Write("アップデートの確認...")
+        ChkUpd()
+        RunApp()
     End Sub
 #End Region
 
@@ -225,6 +208,22 @@ Friend Module Common
     End Sub
 
     ''' <summary>
+    ''' Credit.
+    ''' </summary>
+    Private Sub Credit()
+        If Show("続けたいですか？", "質問", YesNo, Question, Button2) = DialogResult.Yes Then
+            ForegroundColor = Gray
+            Write(vbCrLf & "続行するには、任意のキーを押してください...")
+            ReadKey()
+            RunApp()
+        Else
+            ForegroundColor = Gray
+            Write(vbCrLf & "終了するには、任意のキーを押してください...")
+            ReadKey()
+        End If
+    End Sub
+
+    ''' <summary>
     ''' Header double input.
     ''' </summary>
     ''' <param name="caption">Caption.</param>
@@ -235,6 +234,28 @@ Friend Module Common
         Write(caption)
         ForegroundColor = White
         Return Val(ReadLine)
+    End Function
+
+    ''' <summary>
+    ''' Import value.
+    ''' </summary>
+    ''' <param name="prefix"></param>
+    ''' <returns></returns>
+    Private Function ImpVal(prefix As String)
+        Dim x = 0D
+        For i = 0 To Integer.MaxValue
+            Dim xi = HdrDInp(vbTab & $"{prefix}{i + 1} = ")
+            If Not xi > 0 Then
+                If i = 0 Then
+                    i = -1
+                Else
+                    Exit For
+                End If
+            Else
+                x += ConvertToG(xi)
+            End If
+        Next
+        Return x
     End Function
 #End Region
 End Module
