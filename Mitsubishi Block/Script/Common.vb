@@ -36,8 +36,7 @@ Friend Module Common
     ''' Check update.
     ''' </summary>
     Private Sub ChkUpd()
-        ForegroundColor = DarkYellow
-        Write("アップデートの確認...")
+        HdrSty("アップデートの確認...")
         If IsNetAvail() AndAlso Not (New WebClient).DownloadString(My.Resources.link_ver).Contains(My.Resources.app_ver) Then
             Show($"「{My.Resources.app_true_name}」新しいバージョンが利用可能！", "更新", OK, Information)
             Run(New FrmUpdate)
@@ -100,8 +99,7 @@ Friend Module Common
         For i = 0 To Integer.MaxValue
             Intro()
             If i > 0 Then
-                ForegroundColor = Gray
-                WriteLine(sW)
+                HxSty(sW & vbCrLf)
                 Dim wi = InpG(vbCrLf & vbTab & $"w{i + 1} = ")
                 If wi > 0 Then
                     w += wi
@@ -124,8 +122,7 @@ Friend Module Common
         Dim sH = "H = "
         For i = 0 To Integer.MaxValue
             Intro()
-            ForegroundColor = Gray
-            WriteLine(sW)
+            HxSty(sW & vbCrLf)
             If i > 0 Then
                 WriteLine(sH)
                 Dim hi = InpG(vbCrLf & vbTab & $"h{i + 1} = ")
@@ -158,13 +155,11 @@ Friend Module Common
         ' Output
         Dim fmt = FmtNo(w, h, c, s, block)
         Intro()
-        ForegroundColor = Gray
-        WriteLine(vbTab & "Ｗ (mm)" & vbTab & vbTab & ": " + String.Format(fmt, w))
-        WriteLine(vbTab & "Ｈ (mm)" & vbTab & vbTab & ": " + String.Format(fmt, h))
-        ForegroundColor = DarkCyan
-        WriteLine(vbTab & "Ｃ (m)" & vbTab & vbTab & ": " + String.Format(fmt, c))
-        WriteLine(vbTab & "Ｓ (m²)" & vbTab & vbTab & ": " + String.Format(fmt, s))
-        WriteLine(vbTab & "ブロック (個)" & vbTab & ": " + String.Format(fmt, block))
+        HxSty(vbTab & "Ｗ (mm)" & vbTab & vbTab & ": " + String.Format(fmt, w) & vbCrLf)
+        HxSty(vbTab & "Ｈ (mm)" & vbTab & vbTab & ": " + String.Format(fmt, h) & vbCrLf)
+        RsltSty(vbTab & "Ｃ (m)" & vbTab & vbTab & ": " + String.Format(fmt, c) & vbCrLf)
+        RsltSty(vbTab & "Ｓ (m²)" & vbTab & vbTab & ": " + String.Format(fmt, s) & vbCrLf)
+        RsltSty(vbTab & "ブロック (個)" & vbTab & ": " + String.Format(fmt, block) & vbCrLf)
         Credit()
     End Sub
 
@@ -251,27 +246,75 @@ Friend Module Common
 
 #Region "Actor"
     ''' <summary>
-    ''' Intro.
+    ''' Header style.
     ''' </summary>
-    Private Sub Intro()
-        Clear()
-        ForegroundColor = Blue
-        WriteLine(My.Resources.gr_name)
-        WriteLine(My.Resources.cc_text)
-        ForegroundColor = Green
-        WriteLine(vbCrLf & My.Resources.app_true_name & vbCrLf)
+    ''' <param name="caption">Caption.</param>
+    Private Sub HdrSty(caption As String)
+        ForegroundColor = DarkYellow
+        Write(caption)
     End Sub
 
     ''' <summary>
-    ''' Credit.
+    ''' Intro style.
     ''' </summary>
-    Private Sub Credit()
+    ''' <param name="caption">Caption.</param>
+    Private Sub IntroSty(caption As String)
+        ForegroundColor = Blue
+        Write(caption)
+    End Sub
+
+    ''' <summary>
+    ''' Credit style.
+    ''' </summary>
+    ''' <param name="caption">Caption.</param>
+    Private Sub CreditSty(caption As String)
         ForegroundColor = DarkGray
-        Write(vbCrLf & "続行するには、任意のキーを押してください...")
-        ReadKey()
-        If Show("続けたいですか？", "質問", YesNo, Question, Button2) = DialogResult.Yes Then
-            RunApp()
-        End If
+        Write(caption)
+    End Sub
+
+    ''' <summary>
+    ''' Title style.
+    ''' </summary>
+    ''' <param name="caption">Caption.</param>
+    Private Sub TitSty(caption As String)
+        ForegroundColor = Green
+        Write(caption)
+    End Sub
+
+    ''' <summary>
+    ''' Input style.
+    ''' </summary>
+    ''' <param name="caption">Caption.</param>
+    Private Sub InpSty(caption As String)
+        ForegroundColor = Cyan
+        Write(caption)
+    End Sub
+
+    ''' <summary>
+    ''' History style.
+    ''' </summary>
+    ''' <param name="caption">Caption.</param>
+    Private Sub HxSty(caption As String)
+        ForegroundColor = Gray
+        Write(caption)
+    End Sub
+
+    ''' <summary>
+    ''' Result style.
+    ''' </summary>
+    ''' <param name="caption">Caption.</param>
+    Private Sub RsltSty(caption As String)
+        ForegroundColor = DarkCyan
+        Write(caption)
+    End Sub
+
+    ''' <summary>
+    ''' Error style.
+    ''' </summary>
+    ''' <param name="caption">Caption.</param>
+    Friend Sub ErrSty(caption As String)
+        ForegroundColor = Red
+        Write(caption)
     End Sub
 
     ''' <summary>
@@ -279,9 +322,29 @@ Friend Module Common
     ''' </summary>
     ''' <param name="caption">Caption.</param>
     Private Sub PrefInp(caption As String)
-        ForegroundColor = Cyan
-        Write(caption)
+        InpSty(caption)
         ForegroundColor = White
+    End Sub
+
+    ''' <summary>
+    ''' Intro.
+    ''' </summary>
+    Private Sub Intro()
+        Clear()
+        IntroSty(My.Resources.gr_name & vbCrLf)
+        IntroSty(My.Resources.cc_text & vbCrLf)
+        TitSty(vbCrLf & My.Resources.app_true_name & vbCrLf & vbCrLf)
+    End Sub
+
+    ''' <summary>
+    ''' Credit.
+    ''' </summary>
+    Private Sub Credit()
+        CreditSty(vbCrLf & "続行するには、任意のキーを押してください...")
+        ReadKey()
+        If Show("続けたいですか？", "質問", YesNo, Question, Button2) = DialogResult.Yes Then
+            RunApp()
+        End If
     End Sub
 
     ''' <summary>
