@@ -36,6 +36,8 @@ Friend Module Common
     ''' Check update.
     ''' </summary>
     Private Sub ChkUpd()
+        ForegroundColor = DarkYellow
+        Write("アップデートの確認...")
         If IsNetAvail() AndAlso Not (New WebClient).DownloadString(My.Resources.link_ver).Contains(My.Resources.app_ver) Then
             Show($"「{My.Resources.app_true_name}」新しいバージョンが利用可能！", "更新", OK, Information)
             Run(New FrmUpdate)
@@ -119,8 +121,6 @@ Friend Module Common
     ''' First run.
     ''' </summary>
     Friend Sub FstRunApp()
-        ForegroundColor = DarkYellow
-        Write("アップデートの確認...")
         ChkUpd()
         RunApp()
     End Sub
