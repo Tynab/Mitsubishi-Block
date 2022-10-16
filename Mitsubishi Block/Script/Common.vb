@@ -143,9 +143,9 @@ Friend Module Common
             End If
         Next
         ' Process
-        Dim c = Ceiling((w + h) * 2 / Pow(10, 3))
+        Dim p = Ceiling((w + h) * 2 / Pow(10, 3))
         Dim s = Ceiling(w * h / Pow(10, 6))
-        Dim block = c + s
+        Dim block = p + s
         For i = 10 To Integer.MaxValue
             If (block + i) Mod 30 = 0 Then
                 block += i
@@ -153,11 +153,11 @@ Friend Module Common
             End If
         Next
         ' Output
-        Dim fmt = FmtNo(w, h, c, s, block)
+        Dim fmt = FmtNo(w, h, p, s, block)
         Intro()
         HxSty(vbTab & "Ｗ (mm)" & vbTab & vbTab & ": " + String.Format(fmt, w) & vbCrLf)
         HxSty(vbTab & "Ｈ (mm)" & vbTab & vbTab & ": " + String.Format(fmt, h) & vbCrLf)
-        RsltSty(vbTab & "Ｃ (m)" & vbTab & vbTab & ": " + String.Format(fmt, c) & vbCrLf)
+        RsltSty(vbTab & "Ｐ (m)" & vbTab & vbTab & ": " + String.Format(fmt, p) & vbCrLf)
         RsltSty(vbTab & "Ｓ (m²)" & vbTab & vbTab & ": " + String.Format(fmt, s) & vbCrLf)
         RsltSty(vbTab & "ブロック (個)" & vbTab & ": " + String.Format(fmt, block) & vbCrLf)
         Credit()
