@@ -153,7 +153,7 @@ Friend Module Common
             End If
         Next
         ' Output
-        Dim fmt = FmtNo(w, h, p, s, block)
+        Dim fmt = FmtNo(w, h)
         Intro()
         HxSty(vbTab & "Ｗ (mm)" & vbTab & vbTab & ": " + String.Format(fmt, w) & vbCrLf)
         HxSty(vbTab & "Ｈ (mm)" & vbTab & vbTab & ": " + String.Format(fmt, h) & vbCrLf)
@@ -207,17 +207,11 @@ Friend Module Common
     ''' </summary>
     ''' <param name="w">Width.</param>
     ''' <param name="h">Heigh.</param>
-    ''' <param name="c">Circuit.</param>
-    ''' <param name="s">Spread.</param>
-    ''' <param name="block">Block.</param>
     ''' <returns>Format.</returns>
-    Private Function FmtNo(w As Double, h As Double, c As Double, s As Double, block As Double)
+    Private Function FmtNo(w As Double, h As Double)
         Dim wSize = w.ToString().Length
         Dim hSize = h.ToString().Length
-        Dim cSize = c.ToString().Length
-        Dim sSize = s.ToString().Length
-        Dim blockSize = block.ToString().Length
-        Dim maxSize = Max(Max(Max(wSize, hSize), Max(cSize, sSize)), blockSize)
+        Dim maxSize = Max(wSize, hSize)
         Return "{0," + maxSize.ToString() + ":####.#}"
     End Function
 #End Region
