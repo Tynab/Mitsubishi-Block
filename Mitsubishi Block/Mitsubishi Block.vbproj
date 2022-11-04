@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{07B6CBE0-290E-4F4D-A7AC-627C77DF07E3}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <StartupObject>Mitsubishi_Block.ModuleMain</StartupObject>
+    <StartupObject>Mitsubishi_Block.Main</StartupObject>
     <RootNamespace>Mitsubishi_Block</RootNamespace>
     <AssemblyName>Mitsubishi Block</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -95,7 +95,7 @@
     <Compile Include="Control\FrmUpdate.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ModuleMain.vb" />
+    <Compile Include="Script\Main.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
