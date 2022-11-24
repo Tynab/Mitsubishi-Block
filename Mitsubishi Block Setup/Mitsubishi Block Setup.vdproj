@@ -375,15 +375,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:三菱ブロック"
-        "ProductCode" = "8:{6E1ECCE2-F093-4168-A092-7C15BA7D4785}"
-        "PackageCode" = "8:{6C1AAB88-DE5F-41D3-9CA7-B3D86CEC86FC}"
+        "ProductCode" = "8:{EE715C84-10CA-4507-A78E-8D0F44944793}"
+        "PackageCode" = "8:{3F34F044-BD97-463F-9354-834FD7DA47CA}"
         "UpgradeCode" = "8:{20BC69BC-055F-4209-AFA8-1360AB210A3B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:22.11.4"
+        "ProductVersion" = "8:22.11.24"
         "Manufacturer" = "8:YAN"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -935,7 +935,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_6E9D4EE0ED014E828333AE7E01E66A3D"
             {
-            "SourcePath" = "8:..\\Mitsubishi Block\\obj\\Release\\Mitsubishi Block.exe"
+            "SourcePath" = "8:..\\Mitsubishi Block\\obj\\Debug\\Mitsubishi Block.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_FDAE4B190F6045358586DE96654815D2"
